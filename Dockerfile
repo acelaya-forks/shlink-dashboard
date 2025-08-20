@@ -16,6 +16,7 @@ WORKDIR /shlink-dashboard
 RUN npm ci && node --run build
 # Delete dependencies and install only prod ones
 RUN rm -rf node_modules && npm ci --omit=dev && npm cache clean --force
+RUN mv src node_modules/@shlinkio/dashboard-server
 
 
 FROM node:25.3-slim
