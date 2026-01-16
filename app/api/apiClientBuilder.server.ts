@@ -1,5 +1,5 @@
 import { ShlinkApiClient } from '@shlinkio/shlink-js-sdk';
-import { NodeHttpClient } from '@shlinkio/shlink-js-sdk/node';
+import { FetchHttpClient } from '@shlinkio/shlink-js-sdk/fetch';
 import type { Server } from '../entities/Server';
 
 const apiClients = new Map<string, ShlinkApiClient>();
@@ -12,7 +12,7 @@ export const apiClientBuilder = (server: Server) => {
     return existingApiClient;
   }
 
-  const apiClient = new ShlinkApiClient(new NodeHttpClient(), server);
+  const apiClient = new ShlinkApiClient(new FetchHttpClient(), server);
   apiClients.set(key, apiClient);
   return apiClient;
 };
