@@ -42,7 +42,7 @@ export class ServersRepository extends BaseEntityRepository<Server> {
     const server = this.create({ publicId: crypto.randomUUID(), ...serverData });
     server.users.add(user);
 
-    await this.em.persistAndFlush(server);
+    await this.em.persist(server).flush();
 
     return server;
   }
