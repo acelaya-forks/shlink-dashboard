@@ -38,7 +38,7 @@ export class UsersRepository extends BaseEntityRepository<User> {
       createdAt: new Date(),
       publicId: crypto.randomUUID(),
     });
-    await this.em.persistAndFlush(user);
+    await this.em.persist(user).flush();
 
     return user;
   }
