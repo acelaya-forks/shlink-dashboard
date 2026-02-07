@@ -27,8 +27,9 @@ function TestComponent({ newStateAfterRender, state: initialState, data }: SetUp
         fetcher={fromPartial({ Form, state, data })}
       />
       <button
-        data-testid="update-state"
+        style={{ visibility: 'hidden' }}
         aria-hidden
+        data-testid="update-state"
         onClick={() => newStateAfterRender && setState(newStateAfterRender)}
       />
     </>
