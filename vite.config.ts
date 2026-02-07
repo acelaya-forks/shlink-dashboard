@@ -27,6 +27,9 @@ export default defineConfig({
   test: {
     globals: true,
     clearMocks: true,
+    dir: 'test',
+    setupFiles: './test/setup.ts',
+
     projects: [
       // Run component and client-specific tests in JSDOM environment
       {
@@ -61,8 +64,7 @@ export default defineConfig({
         },
       },
     ],
-    dir: 'test',
-    setupFiles: './test/setup.ts',
+
     coverage: {
       provider: 'v8',
       reportsDirectory: './coverage',
