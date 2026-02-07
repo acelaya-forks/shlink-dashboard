@@ -1,6 +1,7 @@
 import { reactRouter } from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { playwright } from '@vitest/browser-playwright';
 import { resolve } from 'path';
 import { defineConfig } from 'vitest/config';
 
@@ -31,8 +32,14 @@ export default defineConfig({
         test: {
           name: 'browser',
           setupFiles: './test/setup-dom.ts',
-          environment: 'jsdom',
           include: ['**/*.client.test.{ts,tsx}', '**/[A-Z][a-zA-Z0-9]*.test.{ts,tsx}'],
+          browser: {
+            provider: playwright(),
+            enabled: true,
+            headless: true,
+            screenshotFailures: false,
+            instances: [{ browser: 'chromium' }],
+          },
         },
       },
       // Run tests for server-only files in node environment
