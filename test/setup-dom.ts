@@ -1,4 +1,4 @@
-import './setup-node';
+import '@testing-library/jest-dom/vitest';
 import axe from 'axe-core';
 
 axe.configure({

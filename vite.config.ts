@@ -26,6 +26,7 @@ export default defineConfig({
 
   test: {
     globals: true,
+    clearMocks: true,
     projects: [
       // Run component and client-specific tests in JSDOM environment
       {
@@ -56,7 +57,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'node',
-          setupFiles: './test/setup-node.ts',
+          setupFiles: '@testing-library/jest-dom/vitest',
           environment: 'node',
           include: ['**/*.server.test.{ts,tsx}'],
         },
