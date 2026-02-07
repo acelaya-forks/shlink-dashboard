@@ -33,7 +33,6 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'browser',
-          setupFiles: './test/setup-dom.ts',
           include: ['**/*.client.test.{ts,tsx}', '**/[A-Z][a-zA-Z0-9]*.test.{ts,tsx}'],
           exclude: ['**/*.server.test.{ts,tsx}'],
           browser: {
@@ -57,13 +56,13 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'node',
-          setupFiles: '@testing-library/jest-dom/vitest',
           environment: 'node',
           include: ['**/*.server.test.{ts,tsx}'],
         },
       },
     ],
     dir: 'test',
+    setupFiles: './test/setup.ts',
     coverage: {
       provider: 'v8',
       reportsDirectory: './coverage',
