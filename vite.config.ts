@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
 import { resolve } from 'path';
+import stripExports from 'unplugin-strip-exports/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -33,6 +34,7 @@ export default defineConfig({
           name: 'browser',
           setupFiles: './test/setup-dom.ts',
           include: ['**/*.client.test.{ts,tsx}', '**/[A-Z][a-zA-Z0-9]*.test.{ts,tsx}'],
+          exclude: ['**/*.server.test.{ts,tsx}'],
           browser: {
             provider: playwright(),
             enabled: true,
@@ -41,6 +43,13 @@ export default defineConfig({
             instances: [{ browser: 'chromium' }],
           },
         },
+        plugins: [
+          stripExports({
+            // Strip all server-specific symbols from tests run in a browser.
+            // This allows to test route components but making sure no server-specific imports are bundled.
+            match: () => ['loader', 'action', 'middleware'],
+          }),
+        ],
       },
       // Run tests for server-only files in node environment
       {
